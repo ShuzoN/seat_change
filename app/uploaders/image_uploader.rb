@@ -16,7 +16,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # サムネイルを生成する設定
   version :thumb do
     # process :resize_to_fill => [40, 40, gravity = ::Magick::CenterGravity]
-    process :resize_to_fit => [40, 40]
+    process :resize_to_fit => [60, 60]
   end
 
 end

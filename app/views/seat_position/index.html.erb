@@ -1,25 +1,24 @@
-<div class="page-header">
-  <h1><%=t '.title', :default => '席替えアプリ' %></h1>
+<div class="page-body">
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <% @users.each_with_index do |user,idx| %>
+          <% color = linecolor(idx)%>
+          <td class="bg-<%= color %>">
+            <p class="thumb">
+            <%= image_tag(user.image_url(:thumb), class:"img-responsive") %>
+            </p>
+          </td>
+          <% if newline?(idx+1) %> </tr> <% end %>
+        <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
+        <% end %>
+    </table>
+  </div>
+
+  <%= link_to 'SHUFFLE!!',
+    users_path,
+    :class => 'btn btn-success btn-lg' %>
+  <%= link_to 'ユーザ一覧',
+    users_path,
+    :class => 'btn btn-primary' %>
 </div>
-<div class="table-responsive">
-<table>
-    <tr>
-  <% @users.each_with_index do |user,idx| %>
-      <td>
-        <p><%= image_tag user.image_url(:thumb) %></p>
-        <p><%= user.nick_name %></p>
-      </td>
-      <% if newline?(idx+1) %> </tr> <% end %>
-    <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
-  <% end %>
-</table>
-</div>
-
-
-
-<%= link_to 'SHUFFLE!!',
-            users_path,
-            :class => 'btn btn-success btn-lg' %>
-<%= link_to 'ユーザ一覧',
-            users_path,
-            :class => 'btn btn-primary' %>
