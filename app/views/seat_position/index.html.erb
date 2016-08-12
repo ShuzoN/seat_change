@@ -7,7 +7,8 @@ $(function(){
 
   function shufflePosition(){
     var users = gon.users
-    result = rand(users);
+    u = $.extend(true, [], users);
+    result = rand(u);
     updates(result);
   };
 
@@ -29,7 +30,27 @@ $(function(){
     });
   };
 
-  function update(idx, id){
+  function update(idx, uid){
+		var url = "/users/" +uid;
+    aid = uid-1
+    console.debug(idx, uid);
+
+    var users = gon.users
+     var obj = {
+       '_method':'patch',
+       'user': {
+         'nick_name': users[aid].nick_name,
+         'position' : idx + 1 
+       }
+     }
+    console.debug(users[aid])
+    $.ajax({
+			contentType: "application/json", 
+			dataType: "json", 
+			type: "PUT", 
+			url: url,
+      data: JSON.stringify(obj)
+    });
   };
 
 });
