@@ -1,3 +1,40 @@
+<script>
+$(function(){
+  // $("#shuffle-btn").one("click",function(){
+  $("#shuffle-btn").one('click',function(){
+    shufflePosition();
+  });
+
+  function shufflePosition(){
+    var users = gon.users
+    result = rand(users);
+    updates(result);
+  };
+
+  function rand(users) {
+    var result = [];
+    var idx = 0;
+    
+    while(users.length != 0){
+      idx = Math.floor(Math.random() * users.length)
+      result.push(users[idx].id);
+      users.splice(idx,1);
+    }
+    return result;
+  };
+
+  function updates(list){
+    $.each(list, function(idx, user_id){
+      update(idx, user_id);
+    });
+  };
+
+  function update(idx, id){
+  };
+
+});
+</script>
+<body>
 <div class="page-body">
   <div class="table-responsive">
     <table id="seat-position">
@@ -15,9 +52,7 @@
     </table>
   </div>
 
-  <%= link_to 'SHUFFLE!!',
-    users_path,
-    :class => 'btn btn-success btn-lg' %>
+  <a id="shuffle-btn" class="btn btn-success btn-lg">SHUFFLE!!</a>
   <%= link_to 'ユーザ一覧',
     users_path,
     :class => 'btn btn-primary' %>

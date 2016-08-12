@@ -3,6 +3,7 @@ class SeatPositionController < ApplicationController
 
   def index
     @users = User.all.order(:id)
+    gon.users = @users
   end
 
   def get_users
