@@ -2,6 +2,9 @@
   <h1><%=t '.title', :default => '席替えアプリ' %></h1>
 </div>
 
+<%= link_to 'SHUFFLE!!',
+            users_path,
+            :class => 'btn btn-success btn-lg' %>
 <%= link_to 'ユーザ一覧',
             users_path,
             :class => 'btn btn-primary' %>
