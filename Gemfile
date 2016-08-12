@@ -38,6 +38,8 @@ gem 'therubyracer', '0.12.2'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
+gem 'rmagick'
+gem 'carrierwave'
 # --------------------------------------
 
 group :development, :test do
