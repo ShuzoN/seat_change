@@ -1,12 +1,12 @@
 <div class="page-body">
   <div class="table-responsive">
-    <table>
+    <table id="seat-position">
       <tr>
         <% @users.each_with_index do |user,idx| %>
           <% color = linecolor(idx)%>
           <td class="bg-<%= color %>">
-            <p class="thumb">
-            <%= image_tag(user.image_url(:thumb), class:"img-responsive") %>
+            <p class="img-responsive thumb">
+            <%= image_tag user.image_url(:thumb), alt: user.nick_name %>
             </p>
           </td>
           <% if newline?(idx+1) %> </tr> <% end %>
@@ -22,3 +22,4 @@
     users_path,
     :class => 'btn btn-primary' %>
 </div>
+</body>
