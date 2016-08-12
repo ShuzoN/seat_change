@@ -1,6 +1,21 @@
 <div class="page-header">
   <h1><%=t '.title', :default => '席替えアプリ' %></h1>
 </div>
+<div class="table-responsive">
+<table>
+    <tr>
+  <% @users.each_with_index do |user,idx| %>
+      <td>
+        <p><%= image_tag user.image_url(:thumb) %></p>
+        <p><%= user.nick_name %></p>
+      </td>
+      <% if newline?(idx+1) %> </tr> <% end %>
+    <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
+  <% end %>
+</table>
+</div>
+
+
 
 <%= link_to 'SHUFFLE!!',
             users_path,
