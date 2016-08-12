@@ -6,6 +6,6 @@ class SeatPositionController < ApplicationController
   end
 
   def get_users
-    @users = User.all
+    @users = User.all.order(:id)
   end
 end
