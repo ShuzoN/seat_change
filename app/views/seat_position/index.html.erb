@@ -35,7 +35,6 @@ $(function(){
 
   function searchUser(uid, users){
     return $.grep(users, function(u, idx){
-      console.debug(u.id, uid);
       return u.id == uid;
     });
   };
@@ -50,9 +49,11 @@ $(function(){
       'user': {
         'nick_name': user.nick_name,
         'position' : idx + 1,
-        'image'    : user.image.url
+        'image'    : user.image.thumb.url
       }
     };
+    console.debug(user.id);
+    console.debug(user.image.thumb.url);
     $.ajax({
       contentType: "application/json", 
       dataType: "json", 
