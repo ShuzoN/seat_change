@@ -56,7 +56,6 @@
         <a id="favicon" class="navbar-brand" href="/">ChangeSeats</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "座席表", "/"  %></li>
             <li><%= link_to "ユーザ一覧", "/users"  %></li>
           </ul>
         </div>
@@ -65,7 +64,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
