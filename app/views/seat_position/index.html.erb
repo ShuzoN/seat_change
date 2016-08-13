@@ -69,9 +69,9 @@ $(function(){
       <tr>
         <% @users_pos.each_with_index do |user,idx| %>
       <td class="thumb-td">
-        <p  class=" thumb img-responsive">
+        <p  class="thumb">
         <%= image_tag user.image_url(:thumb), 
-            alt: user.nick_name, id:"pos"+(idx+1).to_s %>
+            alt: user.nick_name, id:"pos"+(idx+1).to_s, class:"img-responsive" %>
         </p>
       </td>
       <% if newline?(idx+1) %> </tr> <% end %>
