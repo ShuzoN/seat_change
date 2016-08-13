@@ -33,15 +33,24 @@ $(function(){
     });
   };
 
+  function searchUser(uid, users){
+    return $.grep(users, function(u, idx){
+      console.debug(u.id, uid);
+      return u.id == uid;
+    });
+  };
+
   // user情報を書き換える
   function update(idx, uid){
     var url = "/users/" +uid;
     var users = gon.users;
+    var user  = searchUser(uid, users)[0];
     var obj = {
       '_method':'patch',
       'user': {
-        'nick_name': users[uid-1].nick_name,
-        'position' : idx + 1 
+        'nick_name': user.nick_name,
+        'position' : idx + 1,
+        'image'    : user.image.url
       }
     };
     $.ajax({
@@ -51,15 +60,13 @@ $(function(){
       url: url,
       data: JSON.stringify(obj)
     })
-    .done(function(obj){
+    .done(function(){
       $('#pos'+(idx+1)).attr({
-        src: "/uploads/user/image/"+uid+"/thumb_user"+uid+".jpg",
-        alt: obj.nick_name
+        src: user.image.thumb.url,
+        alt: user.nick_name
       });
-      var name="<p class='nickname'>"+obj.nick_name+"</p>"
+      var name="<p class='nickname'>"+user.nick_name+"</p>"
       $("#name"+(idx+1)).html(name);
-      console.debug($("#name"+(idx+1))[0].innerText);
-      console.debug($("#pos"+(idx+1))[0].src);
      })
     .fail(function(){
       console.log('fails');
