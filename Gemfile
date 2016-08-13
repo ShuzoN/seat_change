@@ -47,6 +47,7 @@ gem 'carrierwave'
 gem 'jquery-turbolinks'
 # controller->jsの変数渡し
 gem 'gon'
+gem 'font-awesome-rails'
 # --------------------------------------
 
 group :development, :test do
