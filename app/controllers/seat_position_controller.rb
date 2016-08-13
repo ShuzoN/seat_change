@@ -7,6 +7,12 @@ class SeatPositionController < ApplicationController
     gon.users = @users
   end
 
+  def shuffle
+    @users = User.all.order(:id)
+    @users_pos = User.all.order(:position)
+    gon.users = @users
+  end
+
   def get_users
     @users = User.all.order(:id)
   end

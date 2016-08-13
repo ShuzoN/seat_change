@@ -1,0 +1,100 @@
+<script>
+$(function(){
+  // $("#shuffle-btn").one("click",function(){
+  $("#shuffle-btn").one('click',function(){
+    shufflePosition();
+  });
+
+  // 席替え関数
+  function shufflePosition(){
+    var users = gon.users
+      u = $.extend(true, [], users);
+    result = rand(u);
+    updates(result);
+  };
+
+  // ランダムに1~24の値を生む
+  function rand(users) {
+    var result = [];
+    var idx = 0;
+
+    while(users.length != 0){
+      idx = Math.floor(Math.random() * users.length)
+        result.push(users[idx].id);
+      users.splice(idx,1);
+    }
+    return result;
+  };
+
+  // updateを繰り返す
+  function updates(list){
+    $.each(list, function(idx, user_id){
+      update(idx, user_id);
+    });
+  };
+
+  function searchUser(uid, users){
+    return $.grep(users, function(u, idx){
+      return u.id == uid;
+    });
+  };
+
+  // user情報を書き換える
+  function update(idx, uid){
+    var url = "/users/" +uid;
+    var users = gon.users;
+    var user  = searchUser(uid, users)[0];
+    var obj = {
+      '_method':'patch',
+      'user': {
+        'nick_name': user.nick_name,
+        'position' : idx + 1,
+        'image'    : user.image.thumb.url
+      }
+    };
+    console.debug(user.id);
+    console.debug(user.image.thumb.url);
+    $.ajax({
+      contentType: "application/json", 
+      dataType: "json", 
+      type: "PUT", 
+      url: url,
+      data: JSON.stringify(obj)
+    })
+    .done(function(){
+      $('#pos'+(idx+1)).attr({
+        src: user.image.thumb.url,
+        alt: user.nick_name
+      });
+      var name="<p class='nickname'>"+user.nick_name+"</p>"
+      $("#name"+(idx+1)).html(name);
+     })
+    .fail(function(){
+      console.log('fails');
+    });
+  };
+});
+</script>
+<div class="page-body">
+  <div id="seat">
+    <table id="seat-table" class="table-responsive">
+      <tr class="seat-tr">
+        <% @users_pos.each_with_index do |user,idx| %>
+      <td class="seat-td">
+        <div class="user-info">
+        <%= image_tag user.image_url(:thumb), 
+            alt: user.nick_name, id:"pos"+(idx+1).to_s, class:"thumb img-responsive" %>
+          <div id="name<%=idx+1%>" >
+            <p class="nickname"><%= user.nick_name %></p>
+          </div>
+        </div>
+
+      </td>
+      <% if newline?(idx+1) %> </tr> <% end %>
+    <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
+    <% end %>
+    </table>
+  </div>
+
+  <a id="shuffle-btn" class="btn btn-success btn-lg">SHUFFLE!!</a>
+</div>
