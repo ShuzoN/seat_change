@@ -64,19 +64,19 @@ $(function(){
 });
 </script>
 <div class="page-body">
-  <div class="table-responsive">
-    <table id="seat-position">
+  <div id="seat">
+    <table id="seat-table" class="table-responsive">
       <tr>
         <% @users_pos.each_with_index do |user,idx| %>
-          <% color = linecolor(idx)%>
-          <td class="thumb-td bg-<%= color %>">
-            <p  class=" thumb img-responsive">
-            <%= image_tag user.image_url(:thumb), alt: user.nick_name, id:"pos"+(idx+1).to_s %>
-            </p>
-          </td>
-          <% if newline?(idx+1) %> </tr> <% end %>
-        <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
-        <% end %>
+      <td class="thumb-td">
+        <p  class=" thumb img-responsive">
+        <%= image_tag user.image_url(:thumb), 
+            alt: user.nick_name, id:"pos"+(idx+1).to_s %>
+        </p>
+      </td>
+      <% if newline?(idx+1) %> </tr> <% end %>
+    <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
+    <% end %>
     </table>
   </div>
 

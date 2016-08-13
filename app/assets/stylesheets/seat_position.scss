@@ -3,8 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //
 
-#seat-position{
-  width: 100%
+#seat {
+  background-image: asset-data-url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+}
+#seat-table{
+  width: 100%;
+  height: 30em;
+  max-height: 40em;
+  background-color: rgba(0,0,0,0.5);
 }
 td.thumb-td{
   text-align: center;
