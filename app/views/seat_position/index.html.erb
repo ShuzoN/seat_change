@@ -66,13 +66,15 @@ $(function(){
 <div class="page-body">
   <div id="seat">
     <table id="seat-table" class="table-responsive">
-      <tr>
+      <tr class="seat-tr">
         <% @users_pos.each_with_index do |user,idx| %>
-      <td class="thumb-td">
-        <p  class="thumb">
+      <td class="seat-td">
+        <div class="user-info">
         <%= image_tag user.image_url(:thumb), 
-            alt: user.nick_name, id:"pos"+(idx+1).to_s, class:"img-responsive" %>
-        </p>
+            alt: user.nick_name, id:"pos"+(idx+1).to_s, class:"thumb img-responsive" %>
+        <div class="nickname"><%= user.nick_name %></div>
+        </div>
+
       </td>
       <% if newline?(idx+1) %> </tr> <% end %>
     <% if newline?(idx+1) && idx< (2*@users.size/3) %> <tr> <% end %>
