@@ -3,15 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //
 
-table {
+#seat-position{
   width: 100%
 }
-td {
+td.thumb-td{
   text-align: center;
   vertical-align: top;
   border-spacing: 5em;
   padding: 1em 0em;
 }
+
 .nickname {
   font-size: 2vw; 
 }

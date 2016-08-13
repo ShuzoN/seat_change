@@ -5,66 +5,73 @@ $(function(){
     shufflePosition();
   });
 
+  // 席替え関数
   function shufflePosition(){
     var users = gon.users
-    u = $.extend(true, [], users);
+      u = $.extend(true, [], users);
     result = rand(u);
     updates(result);
   };
 
+  // ランダムに1~24の値を生む
   function rand(users) {
     var result = [];
     var idx = 0;
-    
+
     while(users.length != 0){
       idx = Math.floor(Math.random() * users.length)
-      result.push(users[idx].id);
+        result.push(users[idx].id);
       users.splice(idx,1);
     }
     return result;
   };
 
+  // updateを繰り返す
   function updates(list){
     $.each(list, function(idx, user_id){
       update(idx, user_id);
     });
   };
 
+  // user情報を書き換える
   function update(idx, uid){
-		var url = "/users/" +uid;
-    aid = uid-1
-    console.debug(idx, uid);
-
+    var url = "/users/" +uid;
     var users = gon.users
-     var obj = {
-       '_method':'patch',
-       'user': {
-         'nick_name': users[aid].nick_name,
-         'position' : idx + 1 
-       }
-     }
-    console.debug(users[aid])
+      var obj = {
+        '_method':'patch',
+        'user': {
+          'nick_name': users[uid-1].nick_name,
+          'position' : idx + 1 
+        }
+      }
     $.ajax({
-			contentType: "application/json", 
-			dataType: "json", 
-			type: "PUT", 
-			url: url,
+      contentType: "application/json", 
+      dataType: "json", 
+      type: "PUT", 
+      url: url,
       data: JSON.stringify(obj)
+    })
+    .done(function(obj){
+      $('#pos'+(idx+1)).attr({
+        src: "/uploads/user/image/"+uid+"/thumb_user"+uid+".jpg",
+        alt: obj.nich_name
+      });
+    })
+    .fail(function(){
+      console.log('fails');
     });
   };
-
 });
 </script>
-<body>
 <div class="page-body">
   <div class="table-responsive">
     <table id="seat-position">
       <tr>
-        <% @users.each_with_index do |user,idx| %>
+        <% @users_pos.each_with_index do |user,idx| %>
           <% color = linecolor(idx)%>
-          <td class="bg-<%= color %>">
-            <p class="img-responsive thumb">
-            <%= image_tag user.image_url(:thumb), alt: user.nick_name %>
+          <td class="thumb-td bg-<%= color %>">
+            <p  class=" thumb img-responsive">
+            <%= image_tag user.image_url(:thumb), alt: user.nick_name, id:"pos"+(idx+1).to_s %>
             </p>
           </td>
           <% if newline?(idx+1) %> </tr> <% end %>
@@ -78,4 +85,3 @@ $(function(){
     users_path,
     :class => 'btn btn-primary' %>
 </div>
-</body>
