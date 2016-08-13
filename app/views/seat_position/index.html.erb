@@ -36,14 +36,14 @@ $(function(){
   // user情報を書き換える
   function update(idx, uid){
     var url = "/users/" +uid;
-    var users = gon.users
-      var obj = {
-        '_method':'patch',
-        'user': {
-          'nick_name': users[uid-1].nick_name,
-          'position' : idx + 1 
-        }
+    var users = gon.users;
+    var obj = {
+      '_method':'patch',
+      'user': {
+        'nick_name': users[uid-1].nick_name,
+        'position' : idx + 1 
       }
+    };
     $.ajax({
       contentType: "application/json", 
       dataType: "json", 
@@ -54,9 +54,13 @@ $(function(){
     .done(function(obj){
       $('#pos'+(idx+1)).attr({
         src: "/uploads/user/image/"+uid+"/thumb_user"+uid+".jpg",
-        alt: obj.nich_name
+        alt: obj.nick_name
       });
-    })
+      var name="<p class='nickname'>"+obj.nick_name+"</p>"
+      $("#name"+(idx+1)).html(name);
+      console.debug($("#name"+(idx+1))[0].innerText);
+      console.debug($("#pos"+(idx+1))[0].src);
+     })
     .fail(function(){
       console.log('fails');
     });
@@ -72,7 +76,9 @@ $(function(){
         <div class="user-info">
         <%= image_tag user.image_url(:thumb), 
             alt: user.nick_name, id:"pos"+(idx+1).to_s, class:"thumb img-responsive" %>
-        <div class="nickname"><%= user.nick_name %></div>
+          <div id="name<%=idx+1%>" >
+            <p class="nickname"><%= user.nick_name %></p>
+          </div>
         </div>
 
       </td>
