@@ -7,7 +7,7 @@
   <dt><strong><%= model_class.human_attribute_name(:nick_name) %>:</strong></dt>
   <dd><%= @user.nick_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= image_tag @user.image_url %></dd>
+  <dd><%= image_tag @user.image_url, class:"img-responsive icon" %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
