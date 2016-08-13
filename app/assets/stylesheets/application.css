@@ -18,3 +18,7 @@
   background: url('favi16.png') no-repeat left center;
   background-size: 16px;
 }
+footer {
+  text-align: left;
+  padding: 5em;
+}
