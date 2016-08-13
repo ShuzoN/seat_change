@@ -2,6 +2,13 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<div class="col-xs-12 col-sm-9">
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_user_path,
+                        :class => 'btn btn-primary' %>
+<%= link_to '座席表', "/",
+            :class => 'btn btn-danger' %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -17,7 +24,7 @@
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.nick_name %></td>
-        <td><%= image_tag user.image_url(:thumb) %></td>
+        <td><%= image_tag user.image_url(:thumb), class:"img-responsive" %></td>
         <td><%= user.position %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -33,6 +40,3 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'btn btn-primary' %>
