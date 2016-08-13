@@ -15,7 +15,8 @@
  *= require_self
  */
 .navbar-brand {
-  background: url('favi16.png') no-repeat left center;
+  background:  no-repeat left center;
+  background-image: asset-data-url('favi16.png');
   background-size: 16px;
 }
 footer {
